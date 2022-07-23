@@ -1,0 +1,42 @@
+.header {
+  margin: 13px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.Buttons {
+  display: flex;
+  justify-content: space-between;
+  width: 210px;
+}
+
+.imagesBackground {
+  background-image: url("./pictures/header.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 40px 16px 71px 16px;
+  & button {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.title {
+  line-height: 40px;
+  font-weight: 400;
+  color: #FFFFFF;
+  text-align: center;
+  font-style: normal;
+  font-size: 40px;
+}
+
+.info {
+  margin: 21px 0 32px 0;
+  line-height: 26px;
+  font-weight: 400;
+  color: #FFFFFF;
+  text-align: center;
+  font-style: normal;
+  font-size: 16px;
+}
