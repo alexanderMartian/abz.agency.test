@@ -1,0 +1,21 @@
+.container {
+  margin: 140px 16px 144px;
+  & button {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.title {
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 40px;
+  color: #000000;
+  width: 90%;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.userContent {
+  margin-bottom: 50px;
+}

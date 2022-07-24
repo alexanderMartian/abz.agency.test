@@ -1,0 +1,45 @@
+.label {
+  display: flex;
+  align-items: center;
+  margin-top: 7px;
+}
+
+.realRadio {
+  width: 0;
+  height: 0;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+.customRadio {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #D0CFCF;
+  border-radius: 50%;
+  &::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #00BDD3;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: 0.2s ease-in;
+  }
+}
+
+.realRadio:checked + .customRadio::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.realRadio:focus + .customRadio {
+  border-color: #00BDD3;
+}
+
+.radioName {
+  margin-left: 12px;
+}

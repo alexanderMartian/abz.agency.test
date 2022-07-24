@@ -1,9 +1,9 @@
 import styles from "./button.module.scss";
 
-const Button = ({text, type}) => {
+const Button = ({text, type, disabled, getUsers}) => {
   const style = (text === "Show more" ? styles.buttonBig : styles.button);
   return (
-    <button className={style} type={type}>
+    <button onClick={getUsers} className={style} type={type} disabled={disabled && disabled}>
       {text}
     </button>
   );
