@@ -18,24 +18,12 @@ const RegistrationForm = () => {
   const [disabled, setDisabled] = useState(false);
   const [token, setToken] = useState("");
 
-  // const searchPositionId = (item) => {
-  //   console.log(item, "item")
-  //   return positions.find(position => position.name === item)
-  // }
-
-
 
   useEffect( () => {
     (async () => {
         try {
           const result = await axios.get(url);
-          // console.log(result.data.users, "result")
           setPositions(result.data.positions)
-
-          // const userCount = 6 - result.data.count;
-          // if (userCount === 0) {
-          //   return;
-          // }
 
         } catch (e) {
           console.error(e);

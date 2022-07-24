@@ -8,7 +8,6 @@ import instance from "../../api/instance";
 
 const UserContainer = () => {
 
-
   const [users, setUsers] = useState([]);
   const [isLastPage, setIsLastPage] = useState(false);
   const [url, setUrl] = useState("users?page=1&count=6");

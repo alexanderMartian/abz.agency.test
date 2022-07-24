@@ -1,0 +1,36 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+  color: #D0CFCF;
+  margin-top: 36px;
+}
+
+.field {
+  border: 1px solid #D0CFCF;
+  border-radius: 4px;
+  > label {
+    color: #7E7E7E;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+  }
+}
+
+.errorMessage {
+  padding-left: 14px;
+  width: 100%;
+  color: #CB3D40;
+  text-align: left;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.phoneInfo {
+  @extend .errorMessage;
+  margin-top: 3px;
+  color: #7E7E7E;
+}
+
+

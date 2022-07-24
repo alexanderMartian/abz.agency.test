@@ -1,5 +1,14 @@
+@import "variables.module.scss";
+
 body {
   font-family: 'Nunito', sans-serif;
   background-color: #F8F8F8;
 }
+
+@media (min-width: $desktopMax) {
+  body {
+    margin: 0 695px;
+  }
+}
+
 

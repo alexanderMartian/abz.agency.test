@@ -1,4 +1,4 @@
-
+@import '../../commonStyles/variables.module';
 
 .header {
   margin: 13px 16px;
@@ -40,6 +40,39 @@
   text-align: center;
   font-style: normal;
   font-size: 16px;
+}
+
+@media (min-width: $tablet) {
+  .header {
+    margin: 13px 32px;
+  }
+
+  .imagesBackground {
+    padding: 89px 194px 163px 194px;
+    background-image: url("./pictures/header_768.jpg");
+  }
+}
+
+@media (min-width: $desktop) {
+  .header {
+    margin: 13px 60px;
+  }
+
+  .imagesBackground {
+    padding: 164px 322px 163px 322px;
+    background-image: url("./pictures/header_1024.jpg");
+  }
+}
+
+@media (min-width: $desktopMax) {
+  .header {
+    margin: 13px 0;
+  }
+
+  .imagesBackground {
+    padding: 164px 395px 163px 395px;
+    background-image: url("./pictures/header_2560.jpg");
+  }
 }
 
 
