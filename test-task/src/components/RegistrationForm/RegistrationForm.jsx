@@ -10,21 +10,21 @@ import { Radio } from '@mui/material';
 import RadioContainer from "../RadioContainer/RadioContainer";
 import UploadContainer from "../UploadContainer/UploadContainer";
 import instance from "../../api/instance";
+import {switchState} from "../../store/reducers/userReducer";
+import {useDispatch} from 'react-redux';
 
 
 const RegistrationForm = () => {
-  const url = "https://frontend-test-assignment-api.abz.agency/api/v1/positions";
   const [positions, setPositions] = useState([]);
   const [disabled, setDisabled] = useState(false);
   const [token, setToken] = useState("");
-
+  const dispatch = useDispatch();
 
   useEffect( () => {
     (async () => {
         try {
-          const result = await axios.get(url);
+          const result = await instance.get("positions")
           setPositions(result.data.positions)
-
         } catch (e) {
           console.error(e);
         }
@@ -53,21 +53,13 @@ const RegistrationForm = () => {
     photo: null,
   };
 
-  const handleSubmit = (values) => {
+  const handleSubmit = async(values, actions) => {
 
-        (async () => {
+
       try {
-        // setIsLoading(true);
-        console.log(values)
-        // const config = {
-        //   headers: { Token: `${token}` }
-        // };
-
-        // console.log(config,  "config")
-
-        console.log(instance.defaults.headers.common['Token'], "token")
         const result = await instance.post("users", values);
-        console.log(result, "result")
+        result.status === 201 && dispatch(switchState())
+
         // if (payload) {
         //   setIsCorrect(true);
         //   setIsLoading(false);
@@ -75,6 +67,7 @@ const RegistrationForm = () => {
         // }
         // setIsLoading(false);
         // setIsCorrect(false);
+        actions.resetForm();
       } catch (e) {
         console.log(e)
         // setIsLoading(false);
@@ -82,7 +75,6 @@ const RegistrationForm = () => {
         //   showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
         // );
       }
-    })();
   };
 
 

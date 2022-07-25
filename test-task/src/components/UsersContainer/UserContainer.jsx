@@ -1,16 +1,17 @@
 import styles from "./UserContainer.module.scss";
-import axios from 'axios';
-// import {getUsers} from "../../api/users"
 import {useEffect, useState} from 'react';
 import UserItem from "../UsersItem/UserItem";
 import Button from "../Button/Button";
 import instance from "../../api/instance";
+import {useDispatch, useSelector} from 'react-redux';
 
 const UserContainer = () => {
 
   const [users, setUsers] = useState([]);
   const [isLastPage, setIsLastPage] = useState(false);
   const [url, setUrl] = useState("users?page=1&count=6");
+  const isSuccessfullyRegistration = useSelector((state) => state.user.isSuccessfullyRegistration);
+
   const usersHTML = users.map((item) => (
     <UserItem
       key={item.id}
@@ -18,13 +19,20 @@ const UserContainer = () => {
     />
   ));
 
+  useEffect( () => {
+    console.log(isSuccessfullyRegistration, 'isSuccessfullyRegistration')
+  },[isSuccessfullyRegistration])
+
   const getUsers = async () => {
     try {
       const result = await instance.get(url);
       const currentPage = result.data.page;
       const totalPage = result.data.total_pages;
 
-      setUsers(users => [...users, ...result.data.users]);
+      isSuccessfullyRegistration ?
+        setUsers(result.data.users)
+        :
+        setUsers(users => [...users, ...result.data.users]);
 
       if (currentPage === totalPage) {
         setIsLastPage(true);
@@ -40,6 +48,15 @@ const UserContainer = () => {
   useEffect( () => {
     getUsers();
   }, [])
+
+  useEffect( () => {
+    if (isSuccessfullyRegistration) {
+    setUrl("users?page=1&count=6");
+    getUsers()
+    }
+
+  }, [isSuccessfullyRegistration])
+
 
 
   return (

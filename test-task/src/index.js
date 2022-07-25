@@ -3,11 +3,16 @@ import ReactDOM from 'react-dom/client';
 import './commonStyles/commonStyles.scss';
 import App from './App';
 import "./reset.scss";
+import {Provider} from 'react-redux';
+import store from "../src/store/store";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  <Provider store={store}>
     <App />
+  </Provider>
+
 );
 
 
