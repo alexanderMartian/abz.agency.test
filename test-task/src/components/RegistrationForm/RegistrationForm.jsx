@@ -1,44 +1,29 @@
 import styles from "./RegistrationForm.module.scss";
-import axios from 'axios';
 import {useEffect, useState} from 'react';
-import {Form, Formik, Field} from 'formik';
+import {Form, Formik} from 'formik';
 import * as yup from 'yup';
 import CustomField from "../CustomField/CustomField";
 import Button from "../Button/Button";
-import RadioItem from "../RadioItem/RadioItem";
-import { Radio } from '@mui/material';
 import RadioContainer from "../RadioContainer/RadioContainer";
 import UploadContainer from "../UploadContainer/UploadContainer";
 import instance from "../../api/instance";
 import {switchState} from "../../store/reducers/userReducer";
 import {useDispatch} from 'react-redux';
+import Preloader from "../Preloader/Preloader";
 
 
 const RegistrationForm = () => {
   const [positions, setPositions] = useState([]);
-  const [disabled, setDisabled] = useState(false);
-  const [token, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   useEffect( () => {
     (async () => {
-        try {
-          const result = await instance.get("positions")
-          setPositions(result.data.positions)
-        } catch (e) {
-          console.error(e);
-        }
-      }
-    )()
-  }, [])
-
-  useEffect( () => {
-    (async () => {
       try {
-        const result = await instance.get("token");
-        console.log(result, "result")
-        setToken(result.data.token)
-        instance.defaults.headers.common['Token'] = result.data.token;
+        const tokenResult = await instance.get("token");
+        instance.defaults.headers.common['Token'] = tokenResult.data.token;
+        const positionResult = await instance.get("positions");
+        setPositions(positionResult.data.positions)
       } catch (e) {
         console.error(e)
       }
@@ -54,20 +39,13 @@ const RegistrationForm = () => {
   };
 
   const handleSubmit = async(values, actions) => {
-
-
       try {
+        setIsLoading(true);
         const result = await instance.post("users", values);
+        console.log(result, "result");
         result.status === 201 && dispatch(switchState())
-
-        // if (payload) {
-        //   setIsCorrect(true);
-        //   setIsLoading(false);
-        //   closeModal();
-        // }
-        // setIsLoading(false);
-        // setIsCorrect(false);
         actions.resetForm();
+        setIsLoading(false);
       } catch (e) {
         console.log(e)
         // setIsLoading(false);
@@ -119,17 +97,12 @@ const RegistrationForm = () => {
 
               return (
                 <>
-                  {/*{isLoading && <Preloader />}*/}
+                  {isLoading && <Preloader />}
                   <Form className={styles.form}>
                     <CustomField name="name" label="Your name" type="text" />
                     <CustomField name="email" label="Email" type="text" />
                     <CustomField name="phone" label="Phone" type="text" />
                     <RadioContainer setFieldValue={setFieldValue} positions={positions}/>
-                    {/*/!*<div className={styles.wrapper}>*!/*/}
-                    {/*/!*  <span className={styles.incorrect}>*!/*/}
-                    {/*/!*    {!isCorrect && 'Incorrect login or password'}*!/*/}
-                    {/*/!*  </span>*!/*/}
-                    {/*/!*</div>*!/*/}
                     <UploadContainer name="photo" setFieldValue={setFieldValue}/>
                     <Button text={"Sign up"} type={'submit'} disabled={!(dirty && isValid)}>Sign In</Button>
                   </Form>
