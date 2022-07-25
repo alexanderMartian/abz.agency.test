@@ -1,6 +1,6 @@
 import styles from "./UploadContainer.module.scss";
-import {Form, useField} from "formik";
-import {useEffect, useState} from "react";
+import {useField} from "formik";
+import {useState} from "react";
 
 const UploadContainer = (props) => {
   const [field, meta] = useField(props);

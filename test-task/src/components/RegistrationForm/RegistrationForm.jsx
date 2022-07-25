@@ -42,12 +42,11 @@ const RegistrationForm = () => {
       try {
         setIsLoading(true);
         const result = await instance.post("users", values);
-        console.log(result, "result");
         result.status === 201 && dispatch(switchState())
         actions.resetForm();
         setIsLoading(false);
       } catch (e) {
-        console.log(e, "e")
+        setIsLoading(false);
         dispatch(
           showMessage({text: e.response.data.message, type: 'error'}),
         );
