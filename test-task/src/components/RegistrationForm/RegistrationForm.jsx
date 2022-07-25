@@ -15,6 +15,8 @@ import Preloader from "../Preloader/Preloader";
 const RegistrationForm = () => {
   const [positions, setPositions] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedValue, setSelectedValue] = useState('');
+  const [uploadFileName, setUploadFileName] = useState("Upload your photo");
   const dispatch = useDispatch();
 
   useEffect( () => {
@@ -44,9 +46,14 @@ const RegistrationForm = () => {
         const result = await instance.post("users", values);
         result.status === 201 && dispatch(switchState())
         actions.resetForm();
+        setSelectedValue("Lawyer");
+        setUploadFileName("Upload your photo")
         setIsLoading(false);
       } catch (e) {
         setIsLoading(false);
+        actions.resetForm();
+        setSelectedValue("Lawyer");
+        setUploadFileName("Upload your photo");
         dispatch(
           showMessage({text: e.response.data.message, type: 'error'}),
         );
@@ -99,8 +106,17 @@ const RegistrationForm = () => {
                     <CustomField name="name" label="Your name" type="text" />
                     <CustomField name="email" label="Email" type="text" />
                     <CustomField name="phone" label="Phone" type="text" />
-                    <RadioContainer setFieldValue={setFieldValue} positions={positions}/>
-                    <UploadContainer name="photo" setFieldValue={setFieldValue}/>
+                    <RadioContainer
+                      setFieldValue={setFieldValue}
+                      positions={positions}
+                      setSelectedValue={setSelectedValue}
+                      selectedValue={selectedValue}/>
+                    <UploadContainer
+                      name="photo"
+                      setFieldValue={setFieldValue}
+                      uploadFileName={uploadFileName}
+                      setUploadFileName={setUploadFileName}
+                    />
                     <Button text={"Sign up"} type={'submit'} disabled={!(dirty && isValid) || isSubmitting}>Sign In</Button>
                   </Form>
                 </>

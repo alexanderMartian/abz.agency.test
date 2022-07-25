@@ -3,8 +3,8 @@ import {useField} from "formik";
 import {useState} from "react";
 
 const UploadContainer = (props) => {
+  const {uploadFileName, setUploadFileName} = props;
   const [field, meta] = useField(props);
-  const [uploadFileName, setUploadFileName] = useState("Upload your photo");
   const isError = meta.error && uploadFileName !== "Upload your photo";
 
   return (

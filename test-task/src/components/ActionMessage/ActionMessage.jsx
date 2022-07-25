@@ -2,27 +2,19 @@ import {useSelector} from 'react-redux';
 import styles from './ActionMessage.module.scss';
 
 function ActionMessage() {
-  const {isActive, type, text} = useSelector(({message}) => message);
+  const {isActive, text, coordinates} = useSelector(({message}) => message)
+  const style = {left: coordinates.left  + "px", top: (coordinates.bottom  - 60) + "px"}
 
   if (!isActive) {
     return null;
   }
 
-  if (type === "showInfo") {
-    return (
-      <div className={styles.showInfo}>
-        <p>{text}</p>
-      </div>
-    )
-  }
-
-  if (type !== "showInfo") {
-    return (
-      <div className={type === 'success' ? styles.successful : styles.error}>
-        <p>{text}</p>
-      </div>
-    );
-  }
+  return (
+    <div
+      style={style} className={styles.showInfo}>
+      <p>{text}</p>
+    </div>
+  )
 }
 
 export default ActionMessage;

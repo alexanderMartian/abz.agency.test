@@ -1,9 +1,8 @@
 import styles from "./RadioContainer.module.scss";
 import RadioItem from "../RadioItem/RadioItem";
-import {useState} from "react";
 
-const RadioContainer = ({positions, setFieldValue}) => {
-  const [selectedValue, setSelectedValue] = useState('');
+
+const RadioContainer = ({positions, setFieldValue, selectedValue, setSelectedValue}) => {
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -20,7 +19,8 @@ const RadioContainer = ({positions, setFieldValue}) => {
             key={item.id}
             name={item.name}
             handleChange={handleChange}
-            selectedValue={selectedValue}/>
+            selectedValue={selectedValue}
+          />
         })}
       </div>
     </>
