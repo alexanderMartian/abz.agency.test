@@ -1,0 +1,27 @@
+
+.successful {
+  position: fixed;
+  top: 90%;
+  right: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  & > p {
+    background-color: #000000DE;
+    padding: 15px;
+    border: 1px solid lightskyblue;
+    color: #FFFFFF;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.error {
+  @extend .successful;
+  & > p {
+    border: 1px solid #CB3D40;
+    color: #CB3D40;
+  }
+}

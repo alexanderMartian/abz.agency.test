@@ -8,9 +8,9 @@ import RadioContainer from "../RadioContainer/RadioContainer";
 import UploadContainer from "../UploadContainer/UploadContainer";
 import instance from "../../api/instance";
 import {switchState} from "../../store/reducers/userReducer";
+import {showMessage} from "../../store/reducers/messageReducer";
 import {useDispatch} from 'react-redux';
 import Preloader from "../Preloader/Preloader";
-
 
 const RegistrationForm = () => {
   const [positions, setPositions] = useState([]);
@@ -47,14 +47,12 @@ const RegistrationForm = () => {
         actions.resetForm();
         setIsLoading(false);
       } catch (e) {
-        console.log(e)
-        // setIsLoading(false);
-        // dispatch(
-        //   showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
-        // );
+        console.log(e, "e")
+        dispatch(
+          showMessage({text: e.response.data.message, type: 'error'}),
+        );
       }
   };
-
 
   const yupValidationSchema = yup.object().shape({
     name: yup.string()
@@ -93,7 +91,7 @@ const RegistrationForm = () => {
             initialValues={initialValues}
             onSubmit={handleSubmit}
             validationSchema={yupValidationSchema}>
-            { ({dirty, isValid, setFieldValue}) => {
+            { ({dirty, isValid, setFieldValue, isSubmitting}) => {
 
               return (
                 <>
@@ -104,7 +102,7 @@ const RegistrationForm = () => {
                     <CustomField name="phone" label="Phone" type="text" />
                     <RadioContainer setFieldValue={setFieldValue} positions={positions}/>
                     <UploadContainer name="photo" setFieldValue={setFieldValue}/>
-                    <Button text={"Sign up"} type={'submit'} disabled={!(dirty && isValid)}>Sign In</Button>
+                    <Button text={"Sign up"} type={'submit'} disabled={!(dirty && isValid) || isSubmitting}>Sign In</Button>
                   </Form>
                 </>
               );
@@ -115,76 +113,3 @@ const RegistrationForm = () => {
 }
 
 export default RegistrationForm;
-
-// const SignIn = ({closeModal}) => {
-//   const dispatch = useDispatch();
-//
-//   const [isCorrect, setIsCorrect] = useState(true);
-//   const [isLoading, setIsLoading] = useState(false);
-//
-//   const initialValues = {
-//     loginOrEmail: '',
-//     password: '',
-//   };
-//
-//   const handleSubmit = (values) => {
-//     (async () => {
-//       try {
-//         setIsLoading(true);
-//         const {payload} = await dispatch(newLogin(values));
-//         if (payload) {
-//           setIsCorrect(true);
-//           setIsLoading(false);
-//           closeModal();
-//         }
-//         setIsLoading(false);
-//         setIsCorrect(false);
-//       } catch (e) {
-//         setIsLoading(false);
-//         dispatch(
-//           showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
-//         );
-//       }
-//     })();
-//   };
-//
-//   const yupValidationSchema = yup.object().shape({
-//     loginOrEmail: yup.string().required('Field is required'),
-//     password: yup
-//       .string()
-//       .required('Field is required ')
-//       .matches(/[0-9A-Za-z]/, 'Wrong password format'),
-//   });
-//
-//   useEffect(() => {
-//     return () => {
-//       setIsCorrect(false);
-//       setIsLoading(false);
-//     };
-//   }, []);
-//
-//   return (
-//     <Formik
-//       initialValues={initialValues}
-//       onSubmit={handleSubmit}
-//       validationSchema={yupValidationSchema}>
-//       {() => {
-//         return (
-//           <>
-//             {isLoading && <Preloader />}
-//             <Form className={styles.form}>
-//               <CustomField name="loginOrEmail" label="Email / Username" type="text" />
-//               <CustomField name="password" label="Password" type="password" />
-//               <div className={styles.wrapper}>
-//                 <span className={styles.incorrect}>
-//                   {!isCorrect && 'Incorrect login or password'}
-//                 </span>
-//               </div>
-//               <Button type={'submit'}>Sign In</Button>
-//             </Form>
-//           </>
-//         );
-//       }}
-//     </Formik>
-//   );
-// };
