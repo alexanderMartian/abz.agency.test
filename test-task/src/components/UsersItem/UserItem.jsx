@@ -19,10 +19,6 @@ const UserItem = ({photo, name, position, email, phone}) => {
         left = left - 100;
       }
 
-      if (fieldName === name) {
-        bottom = bottom - 50;
-      }
-
       dispatch(showMessage({text: fieldName, coordinates: {left, bottom}}))
     }
   }
