@@ -1,0 +1,48 @@
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
+
+.uploadWrapper {
+  margin: 47px 0 0 0;
+}
+
+.uploadInput {
+  display: none;
+}
+
+.uploadTitle {
+  @include textStyles(16, 26, $mainText);
+  border: 1px solid $mainText;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  padding: 13px 15.15px;
+  position: absolute;
+}
+
+.uploadTitleError {
+  @extend .uploadTitle;
+  border-color: #CB3D40;
+}
+
+.uploadInformation {
+  @include textStyles(16, 26, #7E7E7E);
+  border-right: 1px solid #D0CFCF;
+  border-top: 1px solid #D0CFCF;
+  border-bottom: 1px solid #D0CFCF;
+  padding: 13px 0 13px 99px;
+  text-align: center;
+  border-radius: 4px;
+  display: flex;
+}
+
+.uploadInformationError {
+  @extend .uploadInformation;
+  border-color: #CB3D40;
+}
+
+.errorMessage {
+  padding-left: 10px;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 36px;
+  @include textStyles(12, 14, #CB3D40);
+}

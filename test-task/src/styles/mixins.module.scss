@@ -1,0 +1,16 @@
+@mixin flexDirection ($display: flex, $flex-direction: row) {
+  display: $display;
+  flex-direction: $flex-direction;
+}
+
+@mixin flexJustify ($display: flex, $justify-content: center) {
+  display: $display;
+  justify-content: $justify-content;
+}
+
+@mixin textStyles($font-size, $line-height, $color) {
+  font-size: $font-size + px;
+  line-height: $line-height + px;
+  color: $color;
+  font-weight: 400;
+}

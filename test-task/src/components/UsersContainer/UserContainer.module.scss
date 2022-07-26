@@ -1,0 +1,47 @@
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
+
+.container {
+  margin: 140px 32px 144px;
+  position: relative;
+  & button {
+    display: block;
+    margin: 30px auto 0;
+  }
+}
+
+.title {
+  @include textStyles(40, 40, $mainText);
+  width: 90%;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+@media (min-width: $tablet) {
+
+  .container {
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+  .userContent {
+    @include flexJustify(flex, space-between);
+    flex-wrap: wrap;
+    position: relative;
+  }
+}
+
+@media (min-width: $desktop) {
+
+  .container {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+}
+
+@media (min-width: $desktopMax) {
+
+  .container {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,48 @@
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
+
+.container {
+  @include textStyles(16, 26, $mainText);
+  background-color: #FFFFFF;
+  padding: 20px;
+  @include flexDirection(flex, column);
+  align-items: center;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.photo {
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  margin-bottom: 20px;
+}
+
+.name {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.blockInfo {
+  text-align: center;
+}
+
+@media (min-width: $tablet) {
+  .container {
+    min-width: calc(50% - 8px);
+    margin-bottom: 16px;
+  }
+}
+
+@media (min-width: $desktop) {
+  .container {
+    min-width: calc(33.3% - 17.5px);
+    margin-bottom: 29px;
+  }
+}
+
+@media (min-width: $desktopMax) {
+  .container {
+    min-width: calc(33.3% - 17.5px);
+  }
+}

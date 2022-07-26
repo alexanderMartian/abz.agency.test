@@ -1,0 +1,30 @@
+@import "../../styles/mixins.module";
+
+.container {
+  @include flexDirection(flex, column);
+  color: #D0CFCF;
+  margin-top: 36px;
+}
+
+.field {
+  border: 1px solid #D0CFCF;
+  border-radius: 4px;
+  > label {
+    @include textStyles(16, 26, #7E7E7E);
+  }
+}
+
+.errorMessage {
+  padding-left: 14px;
+  width: 100%;
+  text-align: left;
+  @include textStyles(12, 14, #CB3D40);
+}
+
+.phoneInfo {
+  @extend .errorMessage;
+  margin-top: 3px;
+  color: #7E7E7E;
+}
+
+

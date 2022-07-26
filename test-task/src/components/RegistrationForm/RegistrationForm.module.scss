@@ -1,0 +1,43 @@
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
+
+.container {
+  margin: 0 16px;
+}
+
+.title {
+  @include textStyles(40, 40, $mainText);
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.form {
+  position: relative;
+  & button {
+    display: block;
+    margin: 34px auto 100px;
+  }
+}
+
+@media (min-width: $tablet) {
+  .container {
+    margin: 0 194px;
+  }
+}
+
+@media (min-width: $desktop) {
+  .container {
+    margin: 0 322px;
+  }
+}
+
+@media (min-width: $desktopMax) {
+  .container {
+    margin: 0 394px;
+  }
+}
+
+
+
+
