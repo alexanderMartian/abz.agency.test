@@ -8,9 +8,9 @@ import RadioContainer from "../RadioContainer/RadioContainer";
 import UploadContainer from "../UploadContainer/UploadContainer";
 import instance from "../../api/instance";
 import {switchState} from "../../store/reducers/userReducer";
-import {showMessage} from "../../store/reducers/messageReducer";
 import {useDispatch} from 'react-redux';
 import Preloader from "../Preloader/Preloader";
+import {yupValidationSchema} from "./yupValidationSchema/yupValidationSchema"
 
 const RegistrationForm = () => {
   const [positions, setPositions] = useState([]);
@@ -25,9 +25,9 @@ const RegistrationForm = () => {
         const tokenResult = await instance.get("token");
         instance.defaults.headers.common['Token'] = tokenResult.data.token;
         const positionResult = await instance.get("positions");
-        setPositions(positionResult.data.positions)
+        setPositions(positionResult.data.positions);
       } catch (e) {
-        console.error(e)
+        console.error(e);
       }
     })();
   }, [])
@@ -40,55 +40,24 @@ const RegistrationForm = () => {
     photo: null,
   };
 
+  const formReset = (actions) => {
+    actions.resetForm();
+    setSelectedValue("Lawyer");
+    setUploadFileName("Upload your photo");
+  }
+
   const handleSubmit = async(values, actions) => {
       try {
         setIsLoading(true);
         const result = await instance.post("users", values);
-        result.status === 201 && dispatch(switchState())
-        actions.resetForm();
-        setSelectedValue("Lawyer");
-        setUploadFileName("Upload your photo")
+        result.status === 201 && dispatch(switchState());
+        formReset(actions);
         setIsLoading(false);
       } catch (e) {
         setIsLoading(false);
-        actions.resetForm();
-        setSelectedValue("Lawyer");
-        setUploadFileName("Upload your photo");
-        dispatch(
-          showMessage({text: e.response.data.message, type: 'error'}),
-        );
+        formReset(actions);
       }
   };
-
-  const yupValidationSchema = yup.object().shape({
-    name: yup.string()
-      .required('Field is required')
-      .min(2, 'Min. 2 characters required')
-      .max(60, 'Too long name!'),
-    email: yup.string()
-      .required('Field is required')
-      .email('Wrong email address entered'),
-    phone: yup.string()
-      .required('Field is required')
-      .matches(/^[+]{0,1}380([0-9]{9})$/, "Incorrect phone format"),
-    photo: yup
-      .mixed()
-      .required('You must to upload a file')
-      .test("fileSize", "The file is too big", (value) => {
-        return value && value.size <= 5242880;
-      })
-      .test("fileWidthHeight", "The file width and height must be 70px min", (value) => {
-        if (value) {
-          const url = window.URL || window.webkitURL;
-          const img = new Image();
-          img.src = url.createObjectURL(value);
-          img.onload = function () {
-            return (this.width > 70 && this.height > 70)
-          };
-        }
-        return true;
-      })
-  });
 
   return (
     <div className={styles.container}>
@@ -101,8 +70,8 @@ const RegistrationForm = () => {
 
               return (
                 <>
-                  {isLoading && <Preloader />}
                   <Form className={styles.form}>
+                    {isLoading && <Preloader />}
                     <CustomField name="name" label="Your name" type="text" />
                     <CustomField name="email" label="Email" type="text" />
                     <CustomField name="phone" label="Phone" type="text" />
@@ -117,7 +86,11 @@ const RegistrationForm = () => {
                       uploadFileName={uploadFileName}
                       setUploadFileName={setUploadFileName}
                     />
-                    <Button text={"Sign up"} type={'submit'} disabled={!(dirty && isValid) || isSubmitting}>Sign In</Button>
+                    <Button
+                      text={"Sign up"}
+                      type={'submit'}
+                      disabled={!(dirty && isValid) || isSubmitting}
+                    >Sign In</Button>
                   </Form>
                 </>
               );

@@ -1,20 +1,19 @@
 import styles from "./UsersItem.module.scss";
 import {useDispatch} from 'react-redux';
 import {showMessage, hideMessage} from "../../store/reducers/messageReducer";
-import {useRef} from "react";
+
 
 const UserItem = ({photo, name, position, email, phone}) => {
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
 
   const textModernization = (item) => {
     return item.length > 18 ? item.substr(0, 18)+ "..." : item
   }
 
-  const openMessage = (fieldName) => {
+  const openMessage = (fieldName, target) => {
     if (fieldName.length > 17) {
-      let left = inputRef.current.getBoundingClientRect().left;
-      let bottom = inputRef.current.getBoundingClientRect().bottom;
+      let left = target.getBoundingClientRect().left;
+      let bottom = target.getBoundingClientRect().bottom;
 
       if (left > 390 && fieldName.length > 30) {
         left = left - 100;
@@ -35,9 +34,9 @@ const UserItem = ({photo, name, position, email, phone}) => {
   }
 
   return (
-    <div ref={inputRef} className={styles.container}>
+    <div className={styles.container}>
       <img className={styles.photo} src={photo} alt="userPhoto"/>
-      <p onMouseOver={ () => {openMessage(name) }}
+      <p onMouseOver={ ({target}) => {openMessage(name, target) }}
          onMouseOut={ () => {closeMessage(name) }}
          className={styles.name}
       >
@@ -45,7 +44,7 @@ const UserItem = ({photo, name, position, email, phone}) => {
       </p>
       <div className={styles.blockInfo}>
         <p>{position}</p>
-        <p onMouseOver={ () => {openMessage(email) }}
+        <p onMouseOver={ ({target}) => {openMessage(email, target) }}
            onMouseOut={ () => {closeMessage(email) }}
         >
           {textModernization(email)}

@@ -3,7 +3,7 @@ import {useEffect, useState, useRef} from 'react';
 import UserItem from "../UsersItem/UserItem";
 import Button from "../Button/Button";
 import instance from "../../api/instance";
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import Preloader from "../Preloader/Preloader";
 import ActionMessage from "../ActionMessage/ActionMessage";
 
@@ -37,6 +37,7 @@ const UserContainer = () => {
 
       if (currentPage === totalPage) {
         setIsLastPage(true);
+        setIsLoading(false);
         return;
       }
       url.current = result.data.links.next_url.split("v1/")[1];
@@ -61,11 +62,16 @@ const UserContainer = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Working with GET request</h1>
       {isLoading && <Preloader/>}
+      <h1 className={styles.title}>Working with GET request</h1>
       <div className={styles.userContent}>{usersHTML}</div>
       <ActionMessage/>
-      {!isLastPage && <Button getUsers={getUsers} text={"Show more"} type={"button"}/>}
+      {!isLastPage && <Button
+        getUsers={getUsers}
+        text={"Show more"}
+        type={"button"}
+        disabled={isLoading}
+      />}
     </div>
   );
 }
