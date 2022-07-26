@@ -1,7 +1,6 @@
 import styles from "./RadioContainer.module.scss";
 import RadioItem from "../RadioItem/RadioItem";
 
-
 const RadioContainer = ({positions, setFieldValue, selectedValue, setSelectedValue}) => {
 
   const handleChange = (event) => {

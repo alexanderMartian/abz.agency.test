@@ -1,7 +1,6 @@
 import styles from "./RegistrationForm.module.scss";
 import {useEffect, useState} from 'react';
 import {Form, Formik} from 'formik';
-import * as yup from 'yup';
 import CustomField from "../CustomField/CustomField";
 import Button from "../Button/Button";
 import RadioContainer from "../RadioContainer/RadioContainer";

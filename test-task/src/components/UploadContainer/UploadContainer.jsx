@@ -1,11 +1,14 @@
 import styles from "./UploadContainer.module.scss";
 import {useField} from "formik";
-import {useState} from "react";
 
 const UploadContainer = (props) => {
   const {uploadFileName, setUploadFileName} = props;
-  const [field, meta] = useField(props);
+  const [meta] = useField(props);
   const isError = meta.error && uploadFileName !== "Upload your photo";
+
+  const textModernization = (item) => {
+    return item.length > 17 ? item.substr(0, 17)+ "..." : item;
+  }
 
   return (
     <>
@@ -22,7 +25,7 @@ const UploadContainer = (props) => {
         />
         <label className={ isError ? styles.uploadTitleError : styles.uploadTitle} htmlFor="file">Upload</label>
         <label className={ isError ? styles.uploadInformationError : styles.uploadInformation} htmlFor="file">
-          { !isError ? uploadFileName.substr(0, 17) : "Upload your photo"}
+          { !isError ? textModernization(uploadFileName) : "Upload your photo"}
         </label>
       </div>
       <span className={styles.errorMessage}>{isError ? meta.error : '\u00A0'}</span>
