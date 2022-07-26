@@ -7,6 +7,7 @@
   border: none;
   min-width: 100px;
   min-height: 34px;
+  cursor: pointer;
   @include textStyles(16, 26, $mainText);
 
   &:disabled {

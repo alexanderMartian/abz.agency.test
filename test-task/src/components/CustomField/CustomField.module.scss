@@ -4,11 +4,15 @@
   @include flexDirection(flex, column);
   color: #D0CFCF;
   margin-top: 36px;
+  &:first-child {
+    margin-top: 50px;
+  }
 }
 
 .field {
-  border: 1px solid #D0CFCF;
   border-radius: 4px;
+  height: 54px;
+  box-sizing: border-box;
   > label {
     @include textStyles(16, 26, #7E7E7E);
   }
@@ -23,8 +27,8 @@
 
 .phoneInfo {
   @extend .errorMessage;
-  margin-top: 3px;
   color: #7E7E7E;
+  margin-top: 4px;
 }
 
 

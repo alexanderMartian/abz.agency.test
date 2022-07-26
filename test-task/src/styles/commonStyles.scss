@@ -1,12 +1,12 @@
 @import "variables.module.scss";
 
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', sans-serif !important;
   background-color: #F8F8F8;
 }
 
 @media (min-width: $desktopMax) {
-  body {
-    margin: 0 695px;
-  }
+  //body {
+  //  margin: 0 695px;
+  //}
 }

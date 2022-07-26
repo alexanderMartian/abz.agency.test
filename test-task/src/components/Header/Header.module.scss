@@ -2,7 +2,7 @@
 @import "../../styles/mixins.module";
 
 .header {
-  margin: 13px 16px;
+  padding: 13px 16px;
   @include flexJustify(flex, space-between);
   align-items: center;
 }
@@ -36,18 +36,19 @@
 
 @media (min-width: $tablet) {
   .header {
-    margin: 13px 32px;
+    padding: 13px 32px;
+    background-color: #FFFFFF;
   }
 
   .imagesBackground {
-    padding: 89px 194px 163px 194px;
+    padding: 89px 194px 88px 194px;
     background-image: url("./pictures/header_768.jpg");
   }
 }
 
 @media (min-width: $desktop) {
   .header {
-    margin: 13px 60px;
+    padding: 13px 60px;
   }
 
   .imagesBackground {
@@ -58,11 +59,13 @@
 
 @media (min-width: $desktopMax) {
   .header {
-    margin: 13px 0;
+    padding: 13px 695px;
   }
 
   .imagesBackground {
     padding: 164px 395px 163px 395px;
+    margin-left: 695px;
+    margin-right: 695px;
     background-image: url("./pictures/header_2560.jpg");
   }
 }
