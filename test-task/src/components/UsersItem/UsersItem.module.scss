@@ -7,8 +7,11 @@
   padding: 20px;
   @include flexDirection(flex, column);
   align-items: center;
-  margin-bottom: 20px;
+  //margin-bottom: 20px;
   border-radius: 10px;
+  //&:last-of-type {
+  //  margin-bottom: 0;
+  //}
 }
 
 .photo {
@@ -36,7 +39,7 @@
 
 @media (min-width: $desktop) {
   .container {
-    min-width: calc(33.3% - 17.5px);
+    min-width: calc(33.3% - 19px);
     margin-bottom: 29px;
   }
 }

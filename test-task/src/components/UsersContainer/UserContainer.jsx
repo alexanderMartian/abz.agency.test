@@ -55,7 +55,6 @@ const UserContainer = () => {
       url.current = "users?page=1&count=6";
       getUsers();
     }
-
   }, [isSuccessfullyRegistration])
 
   return (

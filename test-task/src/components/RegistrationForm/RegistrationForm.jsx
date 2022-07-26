@@ -59,7 +59,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <h1 className={styles.title}>Working with POST request</h1>
           <Formik
             initialValues={initialValues}
