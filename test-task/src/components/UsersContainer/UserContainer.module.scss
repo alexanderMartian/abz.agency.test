@@ -1,4 +1,5 @@
-@import '../../commonStyles/variables.module';
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
 
 .container {
   margin: 140px 32px 144px;
@@ -10,10 +11,7 @@
 }
 
 .title {
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 40px;
-  color: #000000;
+  @include textStyles(40, 40, $mainText);
   width: 90%;
   margin: 0 auto 50px;
   text-align: center;
@@ -26,9 +24,8 @@
     margin-right: 32px;
   }
   .userContent {
-    display: flex;
+    @include flexJustify(flex, space-between);
     flex-wrap: wrap;
-    justify-content: space-between;
     position: relative;
   }
 }

@@ -1,12 +1,10 @@
+@import "../../styles/mixins.module";
+
 .radioTitle {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
-  color: #000000DE;
+  @include textStyles(16, 26, #000000DE);
   margin: 25px 0 4px 0;
 }
 
 .radioWrapper {
-  display: flex;
-  flex-direction: column;
+  @include flexDirection(flex, column);
 }

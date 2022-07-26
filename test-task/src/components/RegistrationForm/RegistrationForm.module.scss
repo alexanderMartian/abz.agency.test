@@ -1,14 +1,12 @@
-@import '../../commonStyles/variables.module';
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
 
 .container {
   margin: 0 16px;
 }
 
 .title {
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 40px;
-  color: #000000;
+  @include textStyles(40, 40, $mainText);
   width: 90%;
   margin: 0 auto;
   text-align: center;

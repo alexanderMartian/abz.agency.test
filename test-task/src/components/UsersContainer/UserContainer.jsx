@@ -7,9 +7,7 @@ import {useSelector} from 'react-redux';
 import Preloader from "../Preloader/Preloader";
 import ActionMessage from "../ActionMessage/ActionMessage";
 
-
 const UserContainer = () => {
-
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isLastPage, setIsLastPage] = useState(false);

@@ -7,6 +7,11 @@ const CustomField = (props) => {
   const {label, type, name} = props;
   const isError = meta.error && meta.touched;
 
+  const errorElement = (name === "phone") && !isError ?
+    <span className={styles.phoneInfo}>+38 (XXX) XXX - XX - XX</span>
+    :
+    <span className={styles.errorMessage}>{isError ? meta.error : '\u00A0'}</span>
+
   return (
     <div className={styles.container}>
       <TextField
@@ -14,12 +19,9 @@ const CustomField = (props) => {
         {...field}
         label={label}
         type={type}
-        color={isError ? "error" : "primary"}/>
-      {name === "phone" && !isError ?
-        <span className={styles.phoneInfo}>+38 (XXX) XXX - XX - XX</span>
-        :
-        <span className={styles.errorMessage}>{isError ? meta.error : '\u00A0'}</span>
-      }
+        color={isError ? "error" : "primary"}
+      />
+      {errorElement}
     </div>
   );
 }

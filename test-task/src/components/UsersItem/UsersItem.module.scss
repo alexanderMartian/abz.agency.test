@@ -1,15 +1,13 @@
-@import '../../commonStyles/variables.module';
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
 
 .container {
+  @include textStyles(16, 26, $mainText);
   background-color: #FFFFFF;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
+  @include flexDirection(flex, column);
   align-items: center;
   margin-bottom: 20px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
   border-radius: 10px;
 }
 
@@ -38,13 +36,13 @@
 
 @media (min-width: $desktop) {
   .container {
-    min-width: calc(33.3% - 19px);
+    min-width: calc(33.3% - 17.5px);
     margin-bottom: 29px;
   }
 }
 
-//@media (min-width: $desktopMax) {
-//  .container {
-//    min-width: calc(33.3% - 29px);
-//  }
-//}
+@media (min-width: $desktopMax) {
+  .container {
+    min-width: calc(33.3% - 17.5px);
+  }
+}

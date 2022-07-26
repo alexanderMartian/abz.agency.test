@@ -1,13 +1,14 @@
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
+
 .button {
   border-radius: 80px;
   background: #F4E041;
-  font-size: 16px;
-  line-height: 26px;
-  font-weight: 400;
   border: none;
   min-width: 100px;
   min-height: 34px;
-  color: #000000;
+  @include textStyles(16, 26, $mainText);
+
   &:disabled {
     background-color: #B4B4B4;
     color: #FFFFFF;

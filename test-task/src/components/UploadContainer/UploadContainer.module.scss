@@ -1,3 +1,6 @@
+@import '../../styles/variables.module';
+@import "../../styles/mixins.module";
+
 .uploadWrapper {
   margin: 47px 0 0 0;
 }
@@ -7,14 +10,11 @@
 }
 
 .uploadTitle {
-  color: #000000DE;
-  border: 1px solid #000000DE;
+  @include textStyles(16, 26, $mainText);
+  border: 1px solid $mainText;
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
   padding: 13px 15.15px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
   position: absolute;
 }
 
@@ -24,15 +24,12 @@
 }
 
 .uploadInformation {
-  color: #7E7E7E;
+  @include textStyles(16, 26, #7E7E7E);
   border-right: 1px solid #D0CFCF;
   border-top: 1px solid #D0CFCF;
   border-bottom: 1px solid #D0CFCF;
   padding: 13px 0 13px 99px;
   text-align: center;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 26px;
   border-radius: 4px;
   display: flex;
 }
@@ -45,11 +42,7 @@
 .errorMessage {
   padding-left: 10px;
   width: 100%;
-  color: #CB3D40;
   text-align: left;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
   margin-bottom: 36px;
+  @include textStyles(12, 14, #CB3D40);
 }
-
