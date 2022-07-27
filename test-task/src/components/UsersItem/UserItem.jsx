@@ -18,11 +18,6 @@ const UserItem = ({photo, name, position, email, phone}) => {
     return item.length > 18 ? item.substr(0, 18)+ "..." : item
   }
 
-  const photoElement = isValidPhoto ?
-    <img className={styles.photo} src={photo} alt="userPhoto"/>
-    :
-    <Photo className={styles.photo}/>
-
   const openMessage = (fieldName, target) => {
     if (fieldName.length > 17) {
       let left = target.getBoundingClientRect().left;
@@ -41,6 +36,11 @@ const UserItem = ({photo, name, position, email, phone}) => {
       dispatch(hideMessage());
     }
   }
+
+  const photoElement = isValidPhoto ?
+    <img className={styles.photo} src={photo} alt="userPhoto"/>
+    :
+    <Photo className={styles.photo}/>
 
   return (
     <div className={styles.container}>
