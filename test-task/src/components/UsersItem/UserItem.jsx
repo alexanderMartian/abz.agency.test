@@ -1,14 +1,27 @@
 import styles from "./UsersItem.module.scss";
 import {useDispatch} from 'react-redux';
 import {showMessage, hideMessage} from "../../store/reducers/messageReducer";
+import {useEffect, useState} from "react";
+import {ReactComponent as Photo} from './svg/photo-cover.svg';
 
 
 const UserItem = ({photo, name, position, email, phone}) => {
+
+  const [isValidPhoto, setIsValidPhoto] = useState(true);
   const dispatch = useDispatch();
+
+  useEffect( () => {
+    photo.slice(-3) === "png" && setIsValidPhoto(false);
+  }, [])
 
   const textModernization = (item) => {
     return item.length > 18 ? item.substr(0, 18)+ "..." : item
   }
+
+  const photoElement = isValidPhoto ?
+    <img className={styles.photo} src={photo} alt="userPhoto"/>
+    :
+    <Photo className={styles.photo}/>
 
   const openMessage = (fieldName, target) => {
     if (fieldName.length > 17) {
@@ -31,7 +44,7 @@ const UserItem = ({photo, name, position, email, phone}) => {
 
   return (
     <div className={styles.container}>
-      <img className={styles.photo} src={photo} alt="userPhoto"/>
+      {photoElement}
       <p onMouseOver={ ({target}) => {openMessage(name, target) }}
          onMouseOut={ () => {closeMessage(name) }}
          className={styles.name}
